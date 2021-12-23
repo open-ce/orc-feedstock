@@ -14,8 +14,7 @@ source:
     - 0002-Don-t-force-orc-to-be-a-static-library-let-end-user-.patch
 
 build:
-  number: 0
-  skip: true  # [win]
+  number: 1
   run_exports:
     - {{ pin_subpackage("orc", max_pin="x.x.x") }}
 
@@ -25,14 +24,14 @@ requirements:
     - {{ compiler('cxx') }}
     - ninja       # [unix]
     # `protoc` is also used for building
-    - libprotobuf
-    - cmake
+    - libprotobuf {{ protobuf }}
+    - cmake {{ cmake }}
   host:
-    - zlib
+    - zlib  {{ zlib }}
     - snappy
-    - libprotobuf
+    - libprotobuf {{ protobuf }}
     - lz4-c
-    - zstd
+    - zstd  {{ zstd }}
 
 test:
   commands:
@@ -45,9 +44,8 @@ about:
   license_family: Apache
   license_file: LICENSE
   summary: C++ libraries for Apache ORC
+  description: C++ libraries for Apache ORC
 
 extra:
   recipe-maintainers:
-    - wesm
-    - xhochy
-    - nehaljwani
+    - open-ce/open-ce-dev-team

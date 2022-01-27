@@ -2,6 +2,13 @@
 
 set -exo pipefail
 
+if [[ $ppc_arch == "p10" ]]
+then
+  export PATH=/opt/rh/gcc-toolset-10/root/usr/bin:$PATH
+  export CC=/opt/rh/gcc-toolset-10/root/usr/bin/gcc
+  export CXX=/opt/rh/gcc-toolset-10/root/usr/bin/g++
+fi
+
 mkdir -p build
 cd build
 

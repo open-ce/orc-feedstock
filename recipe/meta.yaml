@@ -14,14 +14,14 @@ source:
     - 0002-Don-t-force-orc-to-be-a-static-library-let-end-user-.patch
 
 build:
-  number: 2
+  number: 3
   run_exports:
     - {{ pin_subpackage("orc", max_pin="x.x.x") }}
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}                     #[ppc_arch != "p10"]
+    - {{ compiler('cxx') }}                   #[ppc_arch != "p10"]
     - ninja       # [unix]
     # `protoc` is also used for building
     - libprotobuf {{ protobuf }}

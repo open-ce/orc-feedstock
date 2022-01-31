@@ -24,8 +24,8 @@ then
 	echo "Please set GCC_10_HOME to the install path of gcc-toolset-10"
         exit 1
     else
-        export CC=$GCC_10_HOME/bin/gcc
-        export CXX=$GCC_10_HOME/bin/g++
+        export CC=${GCC_10_HOME}/bin/gcc
+        export CXX=${GCC_10_HOME}/bin/g++
     fi
 fi
 

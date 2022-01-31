@@ -17,6 +17,8 @@ build:
   number: 3
   run_exports:
     - {{ pin_subpackage("orc", max_pin="x.x.x") }}
+  script_env:
+    - GCC_10_HOME                             #[ppc_arch == 'p10']
 
 requirements:
   build:

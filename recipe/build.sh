@@ -19,8 +19,14 @@ set -exo pipefail
 
 if [[ $ppc_arch == "p10" ]]
 then
-  export CC=/opt/rh/gcc-toolset-10/root/usr/bin/gcc
-  export CXX=/opt/rh/gcc-toolset-10/root/usr/bin/g++
+    if [[ -z "${GCC_10_HOME}" ]];
+    then
+	echo "Please set GCC_10_HOME to the install path of gcc-toolset-10"
+        exit 1
+    else
+        export CC=$GCC_10_HOME/bin/gcc
+        export CXX=$GCC_10_HOME/bin/g++
+    fi
 fi
 
 mkdir -p build

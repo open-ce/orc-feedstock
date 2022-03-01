@@ -17,11 +17,13 @@ build:
   number: 3
   run_exports:
     - {{ pin_subpackage("orc", max_pin="x.x.x") }}
+  script_env:
+    - GCC_10_HOME                             #[ppc_arch == 'p10']
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}                     #[ppc_arch != "p10"]
+    - {{ compiler('cxx') }}                   #[ppc_arch != "p10"]
     - ninja       # [unix]
     # `protoc` is also used for building
     - libprotobuf {{ protobuf }}

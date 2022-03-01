@@ -1,6 +1,33 @@
 #!/bin/bash
+# *****************************************************************
+# (C) Copyright IBM Corp. 2022. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# *****************************************************************
 
 set -exo pipefail
+
+if [[ $ppc_arch == "p10" ]]
+then
+    if [[ -z "${GCC_10_HOME}" ]];
+    then
+	echo "Please set GCC_10_HOME to the install path of gcc-toolset-10"
+        exit 1
+    else
+        export CC=${GCC_10_HOME}/bin/gcc
+        export CXX=${GCC_10_HOME}/bin/g++
+    fi
+fi
 
 mkdir -p build
 cd build

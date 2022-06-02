@@ -20,8 +20,8 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}                     #[ppc_arch != "p10"]
-    - {{ compiler('cxx') }}                   #[ppc_arch != "p10"]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - ninja       # [unix]
     # `protoc` is also used for building
     - libprotobuf {{ protobuf }}

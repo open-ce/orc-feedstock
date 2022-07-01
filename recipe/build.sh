@@ -17,18 +17,6 @@
 
 set -exo pipefail
 
-if [[ $ppc_arch == "p10" ]]
-then
-    if [[ -z "${GCC_11_HOME}" ]];
-    then
-	echo "Please set GCC_11_HOME to the install path of gcc-toolset-11"
-        exit 1
-    else
-        export CC=${GCC_11_HOME}/bin/gcc
-        export CXX=${GCC_11_HOME}/bin/g++
-    fi
-fi
-
 mkdir -p build
 cd build
 

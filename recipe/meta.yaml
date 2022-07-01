@@ -1,12 +1,12 @@
-{% set version = "1.7.2" %}
+{% set version = "1.7.4" %}
 
 package:
   name: orc
   version: {{ version }}
 
 source:
-  url: https://github.com/apache/orc/archive/refs/tags/rel/release-{{ version }}.tar.gz
-  sha256: a6ea48f6b4e64200b32387a9beff7751b35af0b9d2372beefe1fd68a36525223
+  git_url: https://github.com/apache/orc
+  git_rev: v{{ version }}
   patches:
     # ORC builds by default with -Werror but some dependencies omit warnings.
     # This deactivates -Werror
@@ -14,16 +14,14 @@ source:
     - 0002-Don-t-force-orc-to-be-a-static-library-let-end-user-.patch
 
 build:
-  number: 4
+  number: 1
   run_exports:
     - {{ pin_subpackage("orc", max_pin="x.x.x") }}
-  script_env:
-    - GCC_11_HOME                             #[ppc_arch == 'p10']
 
 requirements:
   build:
-    - {{ compiler('c') }}                     #[ppc_arch != "p10"]
-    - {{ compiler('cxx') }}                   #[ppc_arch != "p10"]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - ninja       # [unix]
     # `protoc` is also used for building
     - libprotobuf {{ protobuf }}

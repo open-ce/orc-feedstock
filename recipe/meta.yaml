@@ -1,4 +1,4 @@
-{% set version = "1.8.0" %}
+{% set version = "1.8.2" %}
 
 package:
   name: orc
@@ -24,12 +24,12 @@ requirements:
     - {{ compiler('cxx') }}
     - ninja       # [unix]
     # `protoc` is also used for building
-    - libprotobuf {{ protobuf }}
+    - libprotobuf {{ libprotobuf }}
     - cmake {{ cmake }}
   host:
     - zlib  {{ zlib }}
     - snappy
-    - libprotobuf {{ protobuf }}
+    - libprotobuf {{ libprotobuf }}
     - lz4-c
     - zstd  {{ zstd }}
 

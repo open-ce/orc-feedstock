@@ -1,6 +1,6 @@
 #!/bin/bash
 # *****************************************************************
-# (C) Copyright IBM Corp. 2022. All Rights Reserved.
+# (C) Copyright IBM Corp. 2023. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,21 @@ set -exo pipefail
 
 mkdir -p build
 cd build
+
+if [[ $ppc_arch == "p10" ]]
+then
+    if [[ -z "${GCC_11_HOME}" ]];
+    then
+        echo "Please set GCC_11_HOME to the install path of gcc-toolset-11"
+        exit 1
+    else
+        export PATH=$GCC_11_HOME/bin:$PATH
+        export CC=$GCC_11_HOME/bin/gcc
+        export CXX=$GCC_11_HOME/bin/g++
+        export GCC=$CC
+        export GXX=$CXX
+    fi
+fi
 
 declare -a _CMAKE_EXTRA_CONFIG
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then

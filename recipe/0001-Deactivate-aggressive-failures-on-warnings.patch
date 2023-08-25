@@ -1,25 +1,25 @@
-From e58ecc69728783e0012dd7091228c2902223d425 Mon Sep 17 00:00:00 2001
-From: "Korn, Uwe" <Uwe.Korn@blue-yonder.com>
-Date: Tue, 19 Mar 2019 11:16:02 +0100
-Subject: [PATCH 1/2] Deactivate aggressive failures on warnings
+From bd7bf3d8b243af2db64c7288efe9722b80b63776 Mon Sep 17 00:00:00 2001
+From: Deepali Chourasia <deepch23@in.ibm.com>
+Date: Tue, 8 Aug 2023 09:20:59 +0000
+Subject: [PATCH] Deactivate aggressive failures on warnings
 
 ---
  CMakeLists.txt | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 7c0e8413..03708879 100644
+index dcd4e7fd1..7b866f597 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -124,6 +124,8 @@ elseif (MSVC)
+@@ -169,6 +169,8 @@ elseif (MSVC)
    set (WARN_FLAGS "${WARN_FLAGS} -wd4146") # unary minus operator applied to unsigned type, result still unsigned
  endif ()
  
 +set(WARN_FLAGS "")
 +
- enable_testing()
- 
- INCLUDE(CheckSourceCompiles)
+ if (BUILD_CPP_ENABLE_METRICS)
+   message(STATUS "Enable the metrics collection")
+   add_compile_definitions(ENABLE_METRICS=1)
 -- 
-2.31.1
+2.40.1
 
